@@ -23,19 +23,47 @@ class Dialogo (QMainWindow):
         inicial=float(self.leImporte.text())
         convertido=inicial
 
-        if self.rbDeEUR.isChecked():
-            convertido = inicial/self.USDtoEUR
-        elif self.rbDePEN.isChecked():
-            convertido = inicial / self.USDtoPEN
-        elif self.rbDeGBP.isChecked():
-            convertido = inicial / self.USDtoGBP
+        #CALCULO DE CAMBIO DE MONEDA
+        if self.rbDeUSD.isChecked():
+            if self.rbAUSD.isChecked():
+                convertido = 1
+            elif self.rbAEUR.isChecked():
+                convertido = inicial * self.USDtoEUR
+            elif self.rbAPEN.isChecked():
+                convertido = inicial * self.USDtoPEN
+            elif self.rbAGBP.isChecked():
+                convertido = inicial * self.USDtoGBP
 
-        if self.rbAEUR.isChecked():
-            convertido = inicial*self.USDtoEUR
-        elif self.rbAPEN.isChecked():
-            convertido = inicial * self.USDtoPEN
-        elif self.rbAGBP.isChecked():
-            convertido = inicial * self.USDtoGBP
+        elif self.rbDeEUR.isChecked():
+            if self.rbAUSD.isChecked():
+                convertido = inicial / self.USDtoEUR
+            elif self.rbAEUR.isChecked():
+                convertido = 1
+            elif self.rbAPEN.isChecked():
+                convertido = (inicial / self.USDtoEUR) * self.USDtoPEN
+            elif self.rbAGBP.isChecked():
+                convertido = (inicial / self.USDtoEUR) * self.USDtoGBP
+
+        elif self.rbDePEN.isChecked():
+            if self.rbAUSD.isChecked():
+                convertido = inicial / self.USDtoPEN
+            elif self.rbAEUR.isChecked():
+                convertido = (inicial / self.USDtoPEN) * self.USDtoEUR
+            elif self.rbAPEN.isChecked():
+                convertido = 1
+            elif self.rbAGBP.isChecked():
+                convertido = (inicial / self.USDtoPEN) * self.USDtoGBP
+
+        elif self.rbDeGBP.isChecked():
+            if self.rbAUSD.isChecked():
+                convertido = inicial / self.USDtoGBP
+            elif self.rbAEUR.isChecked():
+                convertido = (inicial / self.USDtoGBP) * self.USDtoEUR
+            elif self.rbAPEN.isChecked():
+                convertido = (inicial / self.USDtoGBP) * self.USDtoPEN
+            elif self.rbAGBP.isChecked():
+                convertido = 1
+        # FIN DE CALCULO DE CAMBIO DE MONEDA
 
         self.lblCambio.setText(f"{convertido:.2f}")
 
