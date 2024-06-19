@@ -7,6 +7,7 @@ class Dialogo (QMainWindow):
     # Tipo de cambio 20240619
     USDtoPEN = 3.84
     USDtoEUR = 0.93
+    USDtoGBP = 0.79
 
     def __init__(self):
         ruta = os.path.dirname ( os.path.abspath ( __file__ ) ) + r"\..\vista\currencyConvert.ui"
@@ -23,14 +24,18 @@ class Dialogo (QMainWindow):
         convertido=inicial
 
         if self.rbDeEUR.isChecked():
-            convertido=inicial/self.USDtoEUR
+            convertido = inicial/self.USDtoEUR
         elif self.rbDePEN.isChecked():
             convertido = inicial / self.USDtoPEN
+        elif self.rbDeGBP.isChecked():
+            convertido = inicial / self.USDtoGBP
 
         if self.rbAEUR.isChecked():
-            convertido=inicial*self.USDtoEUR
+            convertido = inicial*self.USDtoEUR
         elif self.rbAPEN.isChecked():
             convertido = inicial * self.USDtoPEN
+        elif self.rbAGBP.isChecked():
+            convertido = inicial * self.USDtoGBP
 
         self.lblCambio.setText(f"{convertido:.2f}")
 
